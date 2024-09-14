@@ -1,0 +1,63 @@
+
+
+.home_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 100vh;
+}
+
+
+
+
+.header {
+    text-align: center;
+}
+
+.header > h1 {
+    font-size: 4rem;
+}
+
+.header > p {
+    font-size: 1.4rem;
+}
+
+.header > * {
+    margin: 0;
+}
+
+
+
+
+.options {
+    text-align: center;
+    margin-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.options > button {
+    border: none;
+    background-color: transparent;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.options > button:hover {
+    transform: scale(1.1)
+}
+
+.options > button:active {
+    transform: scale(1);
+}
+
+
+
