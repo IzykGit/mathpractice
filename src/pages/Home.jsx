@@ -1,7 +1,6 @@
 
 import { useNavigate } from 'react-router'
 import { useState } from 'react'
-import Cookies from 'js-cookie'
 
 import homeCSS from '../styles/Home.module.css'
 
@@ -68,7 +67,7 @@ const Home = () => {
         <main className={homeCSS.home_main}>
             
             <div className={homeCSS.header}>
-                <h1>Math Strat!</h1>
+                <h1>Math Brain!</h1>
                 <p>Math practice for everyone</p>
             </div>
 

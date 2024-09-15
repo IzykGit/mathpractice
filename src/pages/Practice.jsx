@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { getProblemsByTypeAndDifficulty } from "../hooks/getProblems"
-import { getDifficulty } from "../context/setProblemParams"
+
+import { motion } from "framer-motion"
+import { incorrectVariants } from "../data/framer-variants"
+
 
 import practiceCSS from "../styles/Practice.module.css"
 
+
 const Practice = () => {
 
+    const navigate = useNavigate()
 
     const [guess, setGuess] = useState("")
     const [currentProblems, setCurrentProblems] = useState()
@@ -13,6 +19,7 @@ const Practice = () => {
 
     const [streak, setStreak] = useState(0)
 
+    const [incorrect, setIncorrect] = useState(false)
 
 
     useEffect(() => {
@@ -42,7 +49,11 @@ const Practice = () => {
             setStreak(streak + 1)
         }
         else {
+            setIncorrect(true)
             setStreak(0)
+            setTimeout(() => {
+                setIncorrect(false)
+            }, 900)
         }
     }
 
@@ -53,15 +64,17 @@ const Practice = () => {
 
     return (
         <>
-        <div>
+        <p className={incorrect ? practiceCSS.display_streak_error : practiceCSS.display_streak}>Streak: {streak}</p>
+        <button type="button" className={practiceCSS.back} onClick={() => navigate("/")}>Back</button>
+        <main className={practiceCSS.main}>
+            
+            <div className={practiceCSS.problem_width}>
+                {currentProblems && <h1 className={practiceCSS.problem}>{currentProblems[randomGen].problem} = ?</h1>}
 
-            <p className={practiceCSS.display_streak}>Streak: {streak}</p>
-            <main className={practiceCSS.main}>
-                
-                {currentProblems && <h1>{currentProblems[randomGen].problem} = ?</h1>}
-                <div className={practiceCSS.input_container}>
+                <motion.div className={practiceCSS.input_container} style={incorrect && { border: "3px solid #F35F62"}}
+                animate={incorrect ? "incorrect": "default"} variants={incorrectVariants}>
                     <input type="text" id="guess" name="guess" value={guess} onChange={e => setGuess(e.target.value)} className={practiceCSS.input_field}/>
-                </div>
+                </motion.div>
 
                 <div className={practiceCSS.number_buttons}>
                     <button type="button" value={1} onClick={e => handleGuess(e.target.value)}>1</button>
@@ -73,17 +86,14 @@ const Practice = () => {
                     <button type="button" value={7} onClick={e => handleGuess(e.target.value)}>7</button>
                     <button type="button" value={8} onClick={e => handleGuess(e.target.value)}>8</button>
                     <button type="button" value={9} onClick={e => handleGuess(e.target.value)}>9</button>
-
-                    <button type="button" onClick={() => setGuess(guess.slice(0, -1))}>DEL</button>
                     <button type="button" value={0} onClick={e => handleGuess(e.target.value)}>0</button>
-                    <button type="button" onClick={check}>=</button>
+
+                    <button type="button" value={"-"} onClick={e => handleGuess(e.target.value)}>-</button>
+                    <button type="button" onClick={() => setGuess(guess.slice(0, -1))}>DEL</button>
+                    <button type="button" onClick={check} className={practiceCSS.equals}>=</button>
                 </div>
-
-                
-
-            </main>
-        </div>
-
+            </div>
+        </main>
         </>
 
     )

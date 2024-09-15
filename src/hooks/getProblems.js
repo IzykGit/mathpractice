@@ -21,7 +21,7 @@ export const getSubtraction = async () => {
 
     try {
 
-        const response = await axios.get("/subtraction_problems")
+        const response = await axios.get("/subtraction_problems.json")
 
         return response.data
     }
@@ -34,7 +34,7 @@ export const getMultiplication = async () => {
 
     try {
 
-        const response = await axios.get("/multiplication_problems")
+        const response = await axios.get("/multiplication_problems.json")
 
         return response.data
     }
@@ -47,7 +47,7 @@ export const getDivision = async () => {
 
     try {
 
-        const response = await axios.get("division_problems")
+        const response = await axios.get("division_problems.json")
 
         return response.data
     }
