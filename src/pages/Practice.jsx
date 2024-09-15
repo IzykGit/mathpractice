@@ -64,8 +64,11 @@ const Practice = () => {
 
     return (
         <>
-        <p className={incorrect ? practiceCSS.display_streak_error : practiceCSS.display_streak}>Streak: {streak}</p>
-        <button type="button" className={practiceCSS.back} onClick={() => navigate("/")}>Back</button>
+        <div className={practiceCSS.head_container}>
+            <p className={incorrect ? practiceCSS.display_streak_error : practiceCSS.display_streak}>Streak: {streak}</p>
+            <button type="button" className={practiceCSS.back} onClick={() => navigate("/")}>Back</button>
+        </div>
+
         <main className={practiceCSS.main}>
             
             <div className={practiceCSS.problem_width}>
